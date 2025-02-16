@@ -1,0 +1,41 @@
+
+services:
+  gpostgres:
+    image: postgres:17.2-bookworm
+    container_name: gpostgres
+    ports:
+      - "5432:5432"
+    environment:
+      # TODO: Change these to read from .env file
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cgraph
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  gredis:
+    image: redis:8.0-M02-bookworm
+    container_name: gredis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+#  graph_challege:
+#    image: graph_challenge:latest
+#    build: .
+#    container_name: graph_challenge
+#    depends_on:
+#      - postgres
+#      - redis
+#    networks:
+#      - backend
+
+networks:
+    backend:
+        driver: bridge
+
+volumes:
+    postgres:
