@@ -27,7 +27,7 @@ async def bulk_upsert_mentions(session: AsyncSession, mentions_list: list[dict],
 
         update_stmt = stmt.on_conflict_do_update(
             index_elements=["source_username", "target_username"],
-            set_={"weight": MentionEdge.weight + 1}
+            set_={"weight": MentionEdge.weight + stmt.excluded.weight}
         )
 
         await session.execute(update_stmt)
