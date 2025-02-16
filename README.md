@@ -46,7 +46,7 @@ Pros:
 - Results in a smaller overall storage size compared to the insert-only approach because redundant mentions are aggregated into a single row.
 - Avoids the extra join overhead seen in a two-table design.
 
-- Cons:
+Cons:
 
 - While insertion is efficient, lookups are required to detect conflicts, although this is mitigated by database-level optimizations.
 
